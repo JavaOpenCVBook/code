@@ -1,4 +1,4 @@
-code
+Maven2
 ====
 
-Code repository for Java OpenCV Book
+Maven2 repository for Java OpenCV Book
