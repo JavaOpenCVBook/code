@@ -23,5 +23,14 @@ public class ImageProcessor {
 		return image;
 	}
 	
+	public Mat blur(Mat input, int numberOfTimes){
+		Mat sourceImage = new Mat();
+		Mat destImage = input.clone();
+		for(int i=0;i<numberOfTimes;i++){
+			sourceImage = destImage.clone();
+			Imgproc.blur(sourceImage, destImage, new Size(3.0, 3.0));
+		}
+		return destImage;
+	}
 
 }

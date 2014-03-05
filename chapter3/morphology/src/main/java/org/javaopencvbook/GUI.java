@@ -44,7 +44,7 @@ public class GUI {
 	private int kernelSize = 0;
 
 	private final ImageProcessor imageProcessor = new ImageProcessor();
-	private int currentShape = Imgproc.MORPH_RECT;
+	private int currentShape = Imgproc.CV_SHAPE_RECT;
 
 	public GUI(String windowName, Mat newImage) {
 		super();
@@ -104,13 +104,13 @@ public class GUI {
 			public void actionPerformed(ActionEvent event) {
 				String currentShapeString = event.getActionCommand();
 				if(rectangleString.equals(currentShapeString)){
-					currentShape = Imgproc.MORPH_RECT;
+					currentShape = Imgproc.CV_SHAPE_RECT;
 				}
 				else if(ellipseString.equals(currentShapeString)){
-					currentShape = Imgproc.MORPH_ELLIPSE;
+					currentShape = Imgproc.CV_SHAPE_ELLIPSE;
 				}
 				else if(crossString.equals(currentShapeString)){
-					currentShape = Imgproc.MORPH_CROSS;
+					currentShape = Imgproc.CV_SHAPE_CROSS;
 				}
 				processOperation();	
 			}
