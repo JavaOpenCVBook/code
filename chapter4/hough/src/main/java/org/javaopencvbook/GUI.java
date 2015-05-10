@@ -1,10 +1,5 @@
 package org.javaopencvbook;
 
-import org.javaopencvbook.utils.ImageProcessor;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -28,14 +23,19 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-
-
+import org.javaopencvbook.utils.ImageProcessor;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
 
 
 public class GUI {
-	private static final String laplaceString = "Laplace";
-	private static final String sobelString = "Sobel";
-	private static final String cannyString = "Canny";
+	private static final String houghString = "Hough Lines";
+	private static final String circularHoughString = "Circular Hough Lines";
+	private static final String pHoughString = "Probabilistic Hough Lines";
 	private static final String noneString = "None";
 
 
@@ -50,8 +50,8 @@ public class GUI {
 	private int aperture = 3;
 	private int xOrder = 1;
 	private int yOrder = 1;
-	protected int lowThreshold = 10;
-	protected int highThreshold = 50;
+	protected int lowThreshold = 230;
+	protected int highThreshold = 240;
 	private JSlider apertureSlider;
 	private JSlider xorderSlider;
 	private JSlider yOrderSlider;
@@ -160,17 +160,17 @@ public class GUI {
 		noneButton.setSelected(true);
 
 
-		JRadioButton binaryButton = new JRadioButton(sobelString);
+		JRadioButton binaryButton = new JRadioButton(circularHoughString);
 		binaryButton.setMnemonic(KeyEvent.VK_S);
-		binaryButton.setActionCommand(sobelString);
+		binaryButton.setActionCommand(circularHoughString);
 
-		JRadioButton binaryInvButton = new JRadioButton(laplaceString);
+		JRadioButton binaryInvButton = new JRadioButton(houghString);
 		binaryInvButton.setMnemonic(KeyEvent.VK_L);
-		binaryInvButton.setActionCommand(laplaceString);
+		binaryInvButton.setActionCommand(houghString);
 
-		JRadioButton truncateButton = new JRadioButton(cannyString);
+		JRadioButton truncateButton = new JRadioButton(pHoughString);
 		truncateButton.setMnemonic(KeyEvent.VK_C);
-		truncateButton.setActionCommand(cannyString);
+		truncateButton.setActionCommand(pHoughString);
 
 
 
@@ -235,33 +235,33 @@ public class GUI {
 			highThresholdLabel.setEnabled(false);
 			highThresholdSlider.setEnabled(false);
 		}
-		else if(sobelString.equals(operation)){
+		else if(circularHoughString.equals(operation)){
 			apertureSliderLabel.setEnabled(true);
 			apertureSlider   .setEnabled(true);
 			xOrderSliderLabel.setEnabled(true);
 			xorderSlider     .setEnabled(true);
 			yOrderSliderLabel.setEnabled(true);
 			yOrderSlider   .setEnabled(true);
-			lowThresholdSliderLabel.setEnabled(false);
-			lowThresholdSlider.setEnabled(false);
+			lowThresholdSliderLabel.setEnabled(true);
+			lowThresholdSlider.setEnabled(true);
 			highThresholdLabel.setEnabled(false);
 			highThresholdSlider.setEnabled(false);
 
 		}
 
-		else if(laplaceString.equals(operation)){
+		else if(houghString.equals(operation)){
 			apertureSliderLabel.setEnabled(true);
 			apertureSlider   .setEnabled(true);
 			xOrderSliderLabel.setEnabled(false);
 			xorderSlider     .setEnabled(false);
 			yOrderSliderLabel.setEnabled(false);
 			yOrderSlider   .setEnabled(false);
-			lowThresholdSliderLabel.setEnabled(false);
-			lowThresholdSlider.setEnabled(false);
+			lowThresholdSliderLabel.setEnabled(true);
+			lowThresholdSlider.setEnabled(true);
 			highThresholdLabel.setEnabled(false);
 			highThresholdSlider.setEnabled(false);
 		}
-		else if(cannyString.equals(operation)){
+		else if(pHoughString.equals(operation)){
 			if(aperture<3){
 				aperture = 3;
 			}
@@ -420,7 +420,7 @@ public class GUI {
 
 		int minimum = 0;
 		int maximum = 255;
-		int initial = 10;
+		int initial = 240;
 
 		lowThresholdSlider = new JSlider(JSlider.HORIZONTAL,
 				minimum, maximum, initial);
@@ -488,18 +488,84 @@ public class GUI {
 
 	protected void processOperation() {
 
-		if(sobelString.equals(operation)){
-			Imgproc.Sobel(originalImage, image, -1, xOrder,yOrder,aperture,1.0, 0.0);
-//			Core.convertScaleAbs(image, image);
-		}
-		else if(laplaceString.equals(operation)){
-			Imgproc.Laplacian(originalImage, image, -1, aperture, 1.0, 0.0);
-//			Core.convertScaleAbs(image, image);
-//			Imgproc.threshold(image, image, 1, 255, Imgproc.THRESH_BINARY_INV);
+		if(circularHoughString.equals(operation)){
+			Mat circles = new Mat();
+			Mat canny = new Mat();
+			//Imgproc.Canny(originalImage, canny,10 , 50, aperture, false);
+			Imgproc.cvtColor( originalImage, canny, Imgproc.COLOR_BGR2GRAY);
+			Imgproc.blur(canny, canny, new Size(3,3));
+			
+			image = originalImage.clone();
+			
+			//Imgproc.HoughCircles(canny, circles,Imgproc.CV_HOUGH_GRADIENT, 1, lowThreshold);
+			Imgproc.HoughCircles(canny, circles,Imgproc.CV_HOUGH_GRADIENT, 1, canny.rows()/8, 200, lowThreshold, 0, 0 );
+			System.out.println(circles.size());
+			for( int i=0;i<circles.cols();i++){
+				Point center = new Point( circles.get(0,i)[0], circles.get(0, i)[1]);
+				int radius = (int) Math.round(circles.get(0, i)[2]);
+				
+				Core.circle( image, center, radius, new Scalar(0,255,0),3);//radius, color)
+			}
+			
 			
 		}
-		else if(cannyString.equals(operation)){
-			Imgproc.Canny(originalImage, image, lowThreshold, highThreshold, aperture, false);
+		else if(houghString.equals(operation)){
+			Mat canny = new Mat();
+			Imgproc.Canny(originalImage, canny,10 , 50, aperture, false);
+			image = originalImage.clone();
+			Mat lines = new Mat();
+			
+			Imgproc.HoughLines(canny, lines, 1, Math.PI/180, lowThreshold);
+			
+			for( int i = 0; i < lines.cols(); i++ )
+			{
+			  double rho = lines.get(0, i)[0];
+			  double theta = lines.get(0, i)[1];
+			  Point pt1 = new Point(), pt2= new Point();
+			  double a = Math.cos(theta), b = Math.sin(theta);
+			  double x0 = a*rho, y0 = b*rho;
+			  pt1.x = Math.round(x0 + 1000*(-b));
+			  pt1.y = Math.round(y0 + 1000*(a));
+			  pt2.x = Math.round(x0 - 1000*(-b));
+			  pt2.y = Math.round(y0 - 1000*(a));
+			  
+			  Core.line( image, pt1, pt2, new Scalar(255,0,0), 2, Core.LINE_AA,0);
+			}
+			
+		}
+		else if(pHoughString.equals(operation)){
+			Mat canny = new Mat();
+			Imgproc.Canny(originalImage, canny,10 , 50, aperture, false);
+			//canny = originalImage.clone();
+			image = originalImage.clone();
+			
+			//Imgproc.cvtColor(image, image, Imgproc.COLOR_GRAY2BGR);
+		
+		Mat lines = new Mat();
+
+		Imgproc.HoughLinesP(canny, lines, 1, Math.PI/180,  lowThreshold, 50, 5 );
+		for( int i = 0; i < lines.cols(); i++ )
+		{
+			double a = lines.get(0, i)[0];
+			double b = lines.get(0, i)[1];
+			double c = lines.get(0, i)[2];
+			double d = lines.get(0, i)[3];
+			
+			Core.line( image, new Point(a, b), new Point(c, d), new Scalar(0,0,255), 1, Core.LINE_AA,0);
+			
+		}
+		
+		
+//			lines = cvHoughLines2( Edges,
+//			        storage,
+//			        CV_HOUGH_PROBABILISTIC,
+//			        1,
+//			        Math.PI/180,           
+//			        44,// threshold
+//			        2,
+//			        1 );
+			
+			
 		}
 		else if(noneString.equals(operation)){
 			image = originalImage.clone();
