@@ -15,6 +15,7 @@ public class App
 	public static void main(String[] args) throws Exception {
 		String filePath = "src/main/resources/images/marble.jpg";
 		
+		
 		Mat newImage = Highgui.imread(filePath);
 
 		if(newImage.dataAddr()==0){
