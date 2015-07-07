@@ -49,8 +49,7 @@ natives-mac-x86_64 for 64 bit osx.
 5- Import your maven project in your favorite IDE.
 
 5-a) In Netbeans, File -> Open Project -> Browse to the project folder. Click on the Open Project button. Now, right-click the project, and select Build with dependencies. It's time to tell where the native libraries are. Right-click the project -> Properties -> Run ->  VM Options -> Point java.library.path VM option to native files using the following:
- -Djava.library.path="C:\Users\baggio\Documents\OpenCV Offline\code\chapter2\swing-imageshow\target\natives" 
-Now, run the project: Right-click it, Run.
+ -Djava.library.path="C:\Users\baggio\Documents\OpenCV Offline\code\chapter2\swing-imageshow\target\natives" . Of course, you should change   -Djava.library.path="C:\Users\baggio\Documents\OpenCV Offline\code\chapter2\swing-imageshow\target\natives" to your native files folder. Now, run the project: Right-click it, Run.
 
 5-b) In Eclipse, generate a project file through:
 
