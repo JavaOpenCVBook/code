@@ -30,11 +30,11 @@ In order to setup the code, follow these instructions:
 	</dependency>
 
 to
- 	<dependency>
- 		<groupId>org.javaopencvbook</groupId>
-    		<artifactId>opencvjar</artifactId>
-    		<version>2.4.7</version>    	     
-    	</dependency>
+	<dependency>
+		<groupId>org.javaopencvbook</groupId>
+		<artifactId>opencvjar</artifactId>
+		<version>2.4.7</version>  
+	</dependency>
 	
 	<dependency>
 		<groupId>org.javaopencvbook</groupId>
