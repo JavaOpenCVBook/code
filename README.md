@@ -43,7 +43,7 @@ to
 		<groupId>org.javaopencvbook</groupId>
 		<artifactId>opencvjar-runtime</artifactId>
 		<version>2.4.7</version>
-		<classifier>natives-windows-x64</classifier>
+		<classifier>natives-windows-x86_64</classifier>
 	</dependency>
 or maybe
 natives-mac-x86_64 for 64 bit osx.
