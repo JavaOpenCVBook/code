@@ -9,6 +9,8 @@ In order to setup the code, follow these instructions:
 
 1- Setup Maven according to https://maven.apache.org/users/index.html . Make sure you check the links https://maven.apache.org/download.cgi https://maven.apache.org/install.html and https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html .
 
+Also, make sure you download the BINARY file and not the SOURCE one.
+
 2- Go to https://github.com/JavaOpenCVBook/code and download it to some folder (click on Download zip on the right)
 
 
