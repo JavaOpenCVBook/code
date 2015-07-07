@@ -2,7 +2,10 @@ code
 ====
 
 Code repository for Packt Java OpenCV Book
+
 https://www.packtpub.com/application-development/opencv-java-javacv
+
+In order to setup the code, follow these instructions:
 
 1- Setup Maven according to https://maven.apache.org/users/index.html . Make sure you check the links Download Maven and The 5 minute test.
 2- Go to https://github.com/JavaOpenCVBook/code and download it to some folder (click on Download zip on the right)
