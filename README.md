@@ -56,4 +56,4 @@ Now, run the project: Right-click it, Run.
 
 mvn eclipse::eclipse
 
-Then, import it as an existing project in Eclipse. Before running it, check your referenced libraries and look for opencvjar-3.0.0 our opencvjar-2.4.7 and right click it -> Properties -> Native library -> Workspace -> Point it to the native file location, e.g.: histogram/target/natives . Right click your project -> Run as -> Java application -> Point to the App class, press ok and it should run.
+Then, import it as an existing project in Eclipse. Before running it, check your referenced libraries and look for opencvjar-3.0.0 or opencvjar-2.4.7 and right click it -> Properties -> Native library -> Workspace -> Point it to the native file location, e.g.: histogram/target/natives . Right click your project -> Run as -> Java application -> Point to the App class, press ok and it should run.
