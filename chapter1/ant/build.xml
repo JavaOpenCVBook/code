@@ -2,7 +2,7 @@
 
     <property name="src.dir"     value="src"/>
 
-    <property name="lib.dir"     value="C:\Users\baggio\Downloads\opencv2.47\opencv\build\java"/>
+    <property name="lib.dir"     value="${ocvJarDir}"/>
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
     </path>
