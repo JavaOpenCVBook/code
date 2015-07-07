@@ -1,6 +1,48 @@
 code
 ====
 
-Code repository for Java OpenCV Book
+Code repository for Packt Java OpenCV Book
+https://www.packtpub.com/application-development/opencv-java-javacv
 
-The best way to work with the projects is checking them out and typing "mvn package"
+1- Setup Maven according to https://maven.apache.org/users/index.html . Make sure you check the links Download Maven and The 5 minute test.
+2- Go to https://github.com/JavaOpenCVBook/code and download it to some folder (click on Download zip on the right)
+Inline image 1
+3- Extract the projects from the zip file
+4- Customize the desired pom.xml from the chapter according to your platform. For instance, if you want to build for Windows x64, change the desired project pom.xml file from:
+ <dependency>
+    	<groupId>org.javaopencvbook</groupId>
+    	<artifactId>opencvjar</artifactId>
+    	<version>2.4.7</version>    	     
+    </dependency>
+	
+	<dependency>
+		<groupId>org.javaopencvbook</groupId>
+		<artifactId>opencvjar-runtime</artifactId>
+		<version>2.4.7</version>
+		<classifier>natives-windows-x86</classifier>
+	</dependency>
+
+to
+ <dependency>
+    	<groupId>org.javaopencvbook</groupId>
+    	<artifactId>opencvjar</artifactId>
+    	<version>2.4.7</version>    	     
+    </dependency>
+	
+	<dependency>
+		<groupId>org.javaopencvbook</groupId>
+		<artifactId>opencvjar-runtime</artifactId>
+		<version>2.4.7</version>
+		<classifier>natives-windows-x64</classifier>
+	</dependency>
+or maybe
+natives-mac-x86_64 for 64 bit osx.
+
+5- Import your maven project in your favorite IDE.
+5-a) In Netbeans, File -> Open Project -> Browse to the project folder. Click on the Open Project button. Now, right-click the project, and select Build with dependencies. It's time to tell where the native libraries are. Right-click the project -> Properties -> Run ->  VM Options -> Point java.library.path VM option to native files using the following command:
+ -Djava.library.path="C:\Users\baggio\Documents\OpenCV Offline\code\chapter2\swing-imageshow\target\natives" 
+Now, run the project: Right-click it, Run.
+
+5-b) In Eclipse, generate a project file through:
+mvn eclipse::eclipse
+Then, import it as an existing project in Eclipse. Before running it, check your referenced libraries and look for opencvjar-3.0.0 our opencvjar-2.4.7 and right click it -> Properties -> Native library -> Workspace -> Point it to the native file location, e.g.: histogram/target/natives . Right click your project -> Run as -> Java application -> Point to the App class, press ok and it should run.
