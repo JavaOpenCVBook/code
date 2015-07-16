@@ -1,7 +1,6 @@
 package org.javaopencvbook;
 
 import java.awt.Image;
-import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,8 +9,8 @@ import javax.swing.JLabel;
 import org.javaopencvbook.utils.ImageProcessor;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
-import org.opencv.highgui.VideoCapture;
+import org.opencv.videoio.VideoCapture;
+
 
 public class App 
 {
@@ -40,8 +39,7 @@ public class App
 		ImageProcessor imageProcessor = new ImageProcessor();
 		Mat webcamMatImage = new Mat();  
 		Image tempImage;  
-		VideoCapture capture = new VideoCapture("src/main/resources/videos/tree.avi");
-
+		VideoCapture capture = new VideoCapture("src/main/resources/videos/Megamind.avi");
 		if( capture.isOpened()){  
 			while (true){  
 				capture.read(webcamMatImage);  
