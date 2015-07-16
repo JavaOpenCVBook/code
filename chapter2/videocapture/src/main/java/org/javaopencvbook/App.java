@@ -1,7 +1,6 @@
 package org.javaopencvbook;
 
 import java.awt.Image;
-import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,8 +9,8 @@ import javax.swing.JLabel;
 import org.javaopencvbook.utils.ImageProcessor;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
-import org.opencv.highgui.VideoCapture;
+import org.opencv.videoio.VideoCapture;
+import org.opencv.videoio.Videoio;
 
 public class App 
 {
@@ -41,8 +40,9 @@ public class App
 		Mat webcamMatImage = new Mat();  
 		Image tempImage;  
 		VideoCapture capture = new VideoCapture(0);
-		capture.set(Highgui.CV_CAP_PROP_FRAME_WIDTH,320);
-		capture.set(Highgui.CV_CAP_PROP_FRAME_HEIGHT,240);
+		
+		capture.set(Videoio.CAP_PROP_FRAME_WIDTH,320);
+		capture.set(Videoio.CAP_PROP_FRAME_HEIGHT,240);
 
 		if( capture.isOpened()){  
 			while (true){  
