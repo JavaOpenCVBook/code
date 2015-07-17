@@ -27,6 +27,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 
 public class GUI {
 	private JLabel imageView;
@@ -88,7 +89,7 @@ public class GUI {
 		{  
 		    public void mousePressed(MouseEvent e)  
 		    {  
-		    	Core.circle(image,new Point(e.getX(),e.getY()),20, new Scalar(0,0,255), 4);
+		    	Imgproc.circle(image,new Point(e.getX(),e.getY()),20, new Scalar(0,0,255), 4);
 		    	updateView(image);
 		    }  
 		}); 
