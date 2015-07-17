@@ -1,12 +1,8 @@
 package org.javaopencvbook;
 
-import org.javaopencvbook.utils.ImageProcessor;
-import org.javaopencvbook.utils.ImageViewer;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.highgui.Highgui;
-import org.opencv.imgproc.Imgproc;
+import org.opencv.imgcodecs.Imgcodecs;
 
 public class App 
 {
@@ -16,7 +12,7 @@ public class App
 		String filePath = "src/main/resources/images/marble.jpg";
 		
 		
-		Mat newImage = Highgui.imread(filePath);
+		Mat newImage = Imgcodecs.imread(filePath);
 
 		if(newImage.dataAddr()==0){
 			System.out.println("Couldn't open file " + filePath);
