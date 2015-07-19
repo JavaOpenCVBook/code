@@ -271,13 +271,13 @@ public class GUI {
 		originalImageAnnotated = originalImage.clone();
 
 
-		Core.line(originalImageAnnotated,srcPoints[0], srcPoints[1], new Scalar( 255.0,0,0), 2);
-		Core.line(originalImageAnnotated,srcPoints[1], srcPoints[3], new Scalar( 255.0,0,0), 2);
-		Core.line(originalImageAnnotated,srcPoints[3], srcPoints[2], new Scalar( 255.0,0,0), 2);
-		Core.line(originalImageAnnotated,srcPoints[2], srcPoints[0], new Scalar( 255.0,0,0), 2);
+		Imgproc.line(originalImageAnnotated,srcPoints[0], srcPoints[1], new Scalar( 255.0,0,0), 2);
+		Imgproc.line(originalImageAnnotated,srcPoints[1], srcPoints[3], new Scalar( 255.0,0,0), 2);
+		Imgproc.line(originalImageAnnotated,srcPoints[3], srcPoints[2], new Scalar( 255.0,0,0), 2);
+		Imgproc.line(originalImageAnnotated,srcPoints[2], srcPoints[0], new Scalar( 255.0,0,0), 2);
 
 		for(int i=0;i<4;i++){
-			Core.circle(originalImageAnnotated, srcPoints[i], 4, new Scalar (255.0,0,0),-1);
+			Imgproc.circle(originalImageAnnotated, srcPoints[i], 4, new Scalar (255.0,0,0),-1);
 		}
 
 
