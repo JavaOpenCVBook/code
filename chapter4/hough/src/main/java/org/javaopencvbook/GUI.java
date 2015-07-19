@@ -504,7 +504,7 @@ public class GUI {
 				Point center = new Point( circles.get(0,i)[0], circles.get(0, i)[1]);
 				int radius = (int) Math.round(circles.get(0, i)[2]);
 				
-				Core.circle( image, center, radius, new Scalar(0,255,0),3);//radius, color)
+				Imgproc.circle( image, center, radius, new Scalar(0,255,0),3);//radius, color)
 			}
 			
 			
@@ -529,7 +529,7 @@ public class GUI {
 			  pt2.x = Math.round(x0 - 1000*(-b));
 			  pt2.y = Math.round(y0 - 1000*(a));
 			  
-			  Core.line( image, pt1, pt2, new Scalar(255,0,0), 2, Core.LINE_AA,0);
+			  Imgproc.line( image, pt1, pt2, new Scalar(255,0,0), 2, Core.LINE_AA,0);
 			}
 			
 		}
@@ -551,7 +551,7 @@ public class GUI {
 			double c = lines.get(0, i)[2];
 			double d = lines.get(0, i)[3];
 			
-			Core.line( image, new Point(a, b), new Point(c, d), new Scalar(0,0,255), 1, Core.LINE_AA,0);
+			Imgproc.line( image, new Point(a, b), new Point(c, d), new Scalar(0,0,255), 1, Core.LINE_AA,0);
 			
 		}
 		
