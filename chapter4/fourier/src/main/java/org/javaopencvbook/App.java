@@ -1,12 +1,8 @@
 package org.javaopencvbook;
 
-import org.javaopencvbook.utils.ImageProcessor;
-import org.javaopencvbook.utils.ImageViewer;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
-import static org.opencv.imgproc.Imgproc.blur;
+import org.opencv.imgcodecs.Imgcodecs;
 
 public class App 
 {
@@ -15,7 +11,8 @@ public class App
 	public static void main(String[] args) throws Exception {
 		//String filePath = "src/main/resources/images/building.jpg";
 		String filePath = "src/main/resources/images/diagonal.png";
-		Mat newImage = Highgui.imread(filePath, Highgui.CV_LOAD_IMAGE_ANYCOLOR);
+		//String filePath = "src/main/resources/images/vertical.png";
+		Mat newImage = Imgcodecs.imread(filePath, Imgcodecs.CV_LOAD_IMAGE_ANYCOLOR);
 
 		if(newImage.dataAddr()==0){
 			System.out.println("Couldn't open file " + filePath);

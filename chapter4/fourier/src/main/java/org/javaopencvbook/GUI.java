@@ -19,10 +19,8 @@ import org.javaopencvbook.utils.ImageProcessor;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint2f;
-import org.opencv.core.Point;
 import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
+import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 
@@ -134,6 +132,7 @@ public class GUI {
 		Core.log(magnitude, magnitude);
 		
 		
+		
 		int cx = magnitude.cols()/2;
 		int cy = magnitude.rows()/2;
 
@@ -151,8 +150,8 @@ public class GUI {
 		q2.copyTo(q1);
 		tmp.copyTo(q2);
 		
+		magnitude.convertTo(magnitude, CvType.CV_8UC1);
 		Core.normalize(magnitude, magnitude,0,255, Core.NORM_MINMAX, CvType.CV_8UC1);
-		
 
 		image = magnitude.clone();//destImage.clone();
 
