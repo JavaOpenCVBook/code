@@ -14,9 +14,10 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
-import org.opencv.highgui.VideoCapture;
+import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
+import org.opencv.videoio.VideoCapture;
+import org.opencv.videoio.Videoio;
 
 public class App 
 {
@@ -40,7 +41,7 @@ public class App
 	}
 	
 	private void loadCascade() {
-		String cascadePath = "src/main/resources/cascades/cascade.xml";
+		String cascadePath = "src/main/resources/cascades/lbpcascade_frontalface.xml";
 	    faceDetector = new CascadeClassifier(cascadePath);
 	}
 
@@ -58,8 +59,8 @@ public class App
 		Mat webcamMatImage = new Mat();  
 		Image tempImage;  
 		VideoCapture capture = new VideoCapture(0);
-		capture.set(Highgui.CV_CAP_PROP_FRAME_WIDTH,640);
-		capture.set(Highgui.CV_CAP_PROP_FRAME_HEIGHT,480);
+		capture.set(Videoio.CV_CAP_PROP_FRAME_WIDTH,640);
+		capture.set(Videoio.CV_CAP_PROP_FRAME_HEIGHT,480);
 
 		if( capture.isOpened()){  
 			while (true){  
@@ -89,7 +90,7 @@ public class App
 	    faceDetector.detectMultiScale(	image, faceDetections, 1.1, 7,0,new Size(250,40),new Size());
 	    // Draw a bounding box around each face.
 	    for (Rect rect : faceDetections.toArray()) {
-	        Core.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0));
+	        Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0));
 	    }
 	}
 }
