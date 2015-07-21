@@ -25,17 +25,7 @@ public class App
 		
 		responses.put(0,0, new int[]{0,1,1,0,1});
 		
-		
-		
 		Boost boost = Boost.create();
-		//boost.train(data,1, responses); // CV_ROW_SAMPLE = 1
-
-		/*
-	
-		params.set_split_criteria(CvBoost.MISCLASS);
-		params.set_weight_trim_rate(0.0f);*/
-
-
 		
 		boost.setBoostType(Boost.DISCRETE);
 		boost.setWeakCount(3);
@@ -43,6 +33,7 @@ public class App
 		
 		boost.train(data, Ml.ROW_SAMPLE, responses);
 
+		//This will simply show the input data is correctly classified
 		for(int i=0;i<5;i++){
 			System.out.println("Result = " + boost.predict(data.row(i)));
 		}
@@ -54,15 +45,13 @@ public class App
 		System.out.println("New (woman) = " + boost.predict(newPerson));
 		
 		newPerson.put(0, 0, new float[]{1.8f, 0,1});
+		System.out.println(newPerson.dump());
 		
 		System.out.println("New (man) = " + boost.predict(newPerson));
 		
 		newPerson.put(0, 0, new float[]{1.7f, 1,0});
-		
+		System.out.println(newPerson.dump());
 		System.out.println("New (?) = " + boost.predict(newPerson));
 		
-		//boost.save("boost.xml");
-
-
 	}
 }
