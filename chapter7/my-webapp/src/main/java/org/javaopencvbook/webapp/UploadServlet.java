@@ -8,12 +8,10 @@ import java.io.InputStream;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.opencv.core.Core.*;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -21,9 +19,8 @@ import org.opencv.core.MatOfByte;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
 import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
@@ -37,7 +34,7 @@ public class UploadServlet extends HttpServlet {
 	
 
 	public Mat openFile(String fileName) throws Exception{
-		Mat newImage = Highgui.imread(fileName);
+		Mat newImage = Imgcodecs.imread(fileName);
 		if(newImage.dataAddr()==0){
 			throw new Exception ("Couldn't open file "+fileName);
 		}
@@ -51,6 +48,7 @@ public class UploadServlet extends HttpServlet {
 	
 	private void detectFaceAndDrawHat(Mat image, Mat overlay) {		
 	    MatOfRect faceDetections = new MatOfRect();
+	    System.out.println(image.dump());
 	    faceDetector.detectMultiScale(	image, faceDetections, 1.1, 7,0,new Size(),new Size());
 	 
 	    for (Rect rect : faceDetections.toArray()) {
@@ -99,7 +97,7 @@ public class UploadServlet extends HttpServlet {
 	private void writeResponse(HttpServletResponse response, Mat image)
 			throws IOException {
 		MatOfByte outBuffer = new MatOfByte();
-		Highgui.imencode(".jpg", image, outBuffer);
+		Imgcodecs.imencode(".jpg", image, outBuffer);
 		
 		
 		response.setContentType("image/jpeg");  
@@ -131,7 +129,7 @@ public class UploadServlet extends HttpServlet {
 		Mat encodedMat = new Mat(encodedImage.length,1,CvType.CV_8U);
 		encodedMat.put(0, 0,encodedImage);
 		
-		Mat image = Highgui.imdecode(encodedMat, Highgui.CV_LOAD_IMAGE_ANYCOLOR);
+		Mat image = Imgcodecs.imdecode(encodedMat, Imgcodecs.CV_LOAD_IMAGE_ANYCOLOR);
 		return image;
 	}
 
