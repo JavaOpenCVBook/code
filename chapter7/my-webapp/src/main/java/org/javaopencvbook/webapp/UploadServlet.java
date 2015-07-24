@@ -48,7 +48,7 @@ public class UploadServlet extends HttpServlet {
 	
 	private void detectFaceAndDrawHat(Mat image, Mat overlay) {		
 	    MatOfRect faceDetections = new MatOfRect();
-	    System.out.println(image.dump());
+	    
 	    faceDetector.detectMultiScale(	image, faceDetections, 1.1, 7,0,new Size(),new Size());
 	 
 	    for (Rect rect : faceDetections.toArray()) {
