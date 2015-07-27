@@ -11,7 +11,8 @@ import org.javaopencvbook.utils.VideoProcessor;
 import org.javaopencvbook.utils.backgroundProcessors.MixtureOfGaussianBackground;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.highgui.VideoCapture;
+import org.opencv.videoio.VideoCapture;
+
 
 public class App 
 {
@@ -58,10 +59,10 @@ public class App
 	private void runMainLoop(String[] args) throws InterruptedException {
 		ImageProcessor imageProcessor = new ImageProcessor();
 		Image tempImage;  
-		VideoCapture capture = new VideoCapture("src/main/resources/videos/tree.avi");
-		//VideoCapture capture = new VideoCapture(0);
+		
 		VideoProcessor videoProcessor;
-
+		VideoCapture capture = new VideoCapture("src/main/resources/videos/tree.avi");
+		
 		if( capture.isOpened()){
 			
 			capture.read(backgroundImage);
@@ -89,7 +90,7 @@ public class App
 					playbackLabel.setIcon(playbackImageIcon);
 					playbackFrame.pack();
 					
-					Thread.sleep(10);
+					Thread.sleep(70);
 				}  
 				else{  
 					capture = new VideoCapture("src/main/resources/videos/tree.avi");
