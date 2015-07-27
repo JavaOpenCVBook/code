@@ -169,7 +169,7 @@ public class GUI {
 
 	private void drawBoundingBox(MatOfPoint currentContour) {
 		Rect rectangle = Imgproc.boundingRect(currentContour);
-		Core.rectangle(image, rectangle.tl(), rectangle.br(), new Scalar(255,0,0),1);
+		Imgproc.rectangle(image, rectangle.tl(), rectangle.br(), new Scalar(255,0,0),1);
 
 	}
 
@@ -181,7 +181,7 @@ public class GUI {
 		currentContour.convertTo(currentContour2f, CvType.CV_32FC2);
 		Imgproc.minEnclosingCircle(currentContour2f, center, radius);
 		
-		Core.circle(image, center, (int) radius[0], new Scalar(255,0,0));
+		Imgproc.circle(image, center, (int) radius[0], new Scalar(255,0,0));
 		
 	}
 
